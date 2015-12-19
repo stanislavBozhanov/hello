@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Event, HelloerProfile
+from .models import Event, Helloer, Friendship
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -9,10 +9,10 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ('band_id', 'timestamp')
 
 
-class HellowerProfileSerializer(serializers.ModelSerializer):
+class HellowerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = HelloerProfile
+        model = Helloer
         fields = (
             'band_id',
             'name',
@@ -21,3 +21,8 @@ class HellowerProfileSerializer(serializers.ModelSerializer):
             'email',
             'facebook'
         )
+
+class FriendshipSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Friendship

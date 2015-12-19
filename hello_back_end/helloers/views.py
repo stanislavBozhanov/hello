@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import HelloerProfile
-from .serializers import EventSerializer, HellowerProfileSerializer
+from .models import Helloer,Friendship
+from .serializers import EventSerializer, HellowerSerializer
 
 
 @api_view(['POST'])
@@ -19,15 +19,36 @@ def event(request):
 
 @api_view(['POST'])
 def login(request):
-    if (request.data['user'] == 'viki' and request.data['pass'] == 'viki') or \
-            (request.data['user'] == 'stenly' and request.data['pass'] == 'stenly'):
+    if (request.data['user'] == 'Viki' and request.data['pass'] == 'Viki') or \
+            (request.data['user'] == 'Stenly' and request.data['pass'] == 'Stenly'):
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 def profile(request):
+    if request.method == 'GET':
         name = request.query_params.get('user')
-        user = get_object_or_404(HelloerProfile, name=name)
-        serializer = HellowerProfileSerializer(user, many=False)
+        user = get_object_or_404(Helloer, name=name)
+        serializer = HellowerSerializer(user, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        name = request.query_params.get('user')
+        user = get_object_or_404(Helloer, name=name)
+        serializer = HellowerSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def friends(request):
+    # name = request.query_params.get('user')
+    # user = get_object_or_404(Helloer, name=name)
+    # friendships = Friendship.objects.filter(user=user.id).first()
+    # friend_id = friendships.friend_id.id
+    # serializer = HellowerSerializer(friend)
+    return Response(status=status.HTTP_200_OK)
+
