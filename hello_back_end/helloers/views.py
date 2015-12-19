@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .helper import friendship_request
 from .models import Helloer,Friendship
 from .serializers import EventSerializer, HellowerSerializer
 
@@ -13,6 +14,7 @@ def event(request):
     serializer = EventSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+        friendship_request()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -45,10 +47,10 @@ def profile(request):
 
 @api_view(['GET'])
 def friends(request):
-    # name = request.query_params.get('user')
-    # user = get_object_or_404(Helloer, name=name)
-    # friendships = Friendship.objects.filter(user=user.id).first()
-    # friend_id = friendships.friend_id.id
-    # serializer = HellowerSerializer(friend)
-    return Response(status=status.HTTP_200_OK)
+    name = request.query_params.get('user')
+    user = get_object_or_404(Helloer, name=name)
+    friendships = Friendship.objects.filter(user=user.id).first()
+    friend = friendships.friend
+    serializer = HellowerSerializer(friend)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
