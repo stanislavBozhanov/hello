@@ -5,3 +5,6 @@ class Event(models.Model):
     band_id = models.SmallIntegerField()
     timestamp = models.DateTimeField()
 
+#
+# class Helloer(models.Model):
+#
