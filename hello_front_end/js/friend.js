@@ -4,7 +4,8 @@ var data = {
 	"age":24,
 	"telephone":"088134474",
 	"email":"stenly@gmail.com",
-	"facebook":"St Nik"
+	"facebook":"St Nik",
+	"time":"20.12.2015 13:30"
 };
 $(document).ready(function(){
 	$("#friend_name").text(data["name"]);
@@ -12,4 +13,5 @@ $(document).ready(function(){
 	$("#friend_tel").text(data["telephone"]);
 	$("#friend_email").text(data["email"]);
 	$("#friend_fb").text(data["facebook"]);
+	$("#time").text(data["time"]);
 })
