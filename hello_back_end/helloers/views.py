@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from .helper import friendship_request
 from .models import Helloer,Friendship
-from .serializers import EventSerializer, HellowerSerializer
+from .serializers import EventSerializer, HelloerSerializer, FriendshipSerializer
 
 
 @api_view(['POST'])
@@ -32,12 +32,12 @@ def profile(request):
     if request.method == 'GET':
         name = request.query_params.get('user')
         user = get_object_or_404(Helloer, name=name)
-        serializer = HellowerSerializer(user, many=False)
+        serializer = HelloerSerializer(user, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT':
         name = request.query_params.get('user')
         user = get_object_or_404(Helloer, name=name)
-        serializer = HellowerSerializer(user, data=request.data, partial=True)
+        serializer = HelloerSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -50,6 +50,5 @@ def friends(request):
     name = request.query_params.get('user')
     user = get_object_or_404(Helloer, name=name)
     friendships = Friendship.objects.filter(user=user.id).first()
-    friend = friendships.friend
-    serializer = HellowerSerializer(friend)
+    serializer = FriendshipSerializer(friendships)
     return Response(serializer.data, status=status.HTTP_200_OK)

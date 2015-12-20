@@ -30,7 +30,7 @@ admin.site.register(Helloer, HelloerAdmin)
 
 class FriendshipAdmin(admin.ModelAdmin):
     list_display = (
-        'date'
+        'date',
         'user',
         'friend'
     )

@@ -9,7 +9,7 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ('band_id', 'timestamp')
 
 
-class HellowerSerializer(serializers.ModelSerializer):
+class HelloerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Helloer
@@ -22,16 +22,15 @@ class HellowerSerializer(serializers.ModelSerializer):
             'facebook'
         )
 
-class HellowerFriendSerializer(serializers.ModelSerializer):
+class FriendshipSerializer(serializers.ModelSerializer):
+
+    user = HelloerSerializer(many=False, read_only=True)
+    friend = HelloerSerializer(many=False, read_only=True)
 
     class Meta:
-        model = Helloer
+        model = Friendship
         fields = (
-            'date'
-            'band_id',
-            'name',
-            'age',
-            'telephone',
-            'email',
-            'facebook'
+            'date',
+            'user',
+            'friend',
         )

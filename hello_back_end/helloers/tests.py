@@ -56,11 +56,21 @@ class EventTests(TestCase):
         self.client.post(url, data, format='json')
         self.assertEqual(Event.objects.all().count(), 1)
 
-    def test_get_profile_data(self):
-        data = {
-            'user': 'Viki'
-        }
-        url = reverse('helloers:profile')
+    # def test_get_profile_data(self):
+    #     data = {
+    #         'user': 'Viki'
+    #     }
+    #     url = reverse('helloers:profile')
         response = self.client.get(url, data, format='json')
-        self.assertEqual(Event.objects.all().count(), 1)
-        print(response.data)
+        # self.assertEqual(Event.objects.all().count(), 1)
+        # print(response.data)
+
+    # def test_get_friends(self):
+    #     Friendship.objects.create(user=self.viki_helloer, friend=self.stenly_helloer)
+    #     Friendship.objects.create(user=self.stenly_helloer, friend=self.viki_helloer)
+    #     data = {
+    #         'user': 'Viki'
+    #     }
+    #     url = reverse('helloers:friends')
+    #     response = self.client.get(url, data, format='json')
+    #     print(response.data['date'])
