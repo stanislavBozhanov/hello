@@ -22,7 +22,16 @@ class HellowerSerializer(serializers.ModelSerializer):
             'facebook'
         )
 
-class FriendshipSerializer(serializers.ModelSerializer):
+class HellowerFriendSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Friendship
+        model = Helloer
+        fields = (
+            'date'
+            'band_id',
+            'name',
+            'age',
+            'telephone',
+            'email',
+            'facebook'
+        )

@@ -19,5 +19,6 @@ class Helloer(models.Model):
 
 
 class Friendship(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Helloer, related_name='friendship_requests_sent')
     friend = models.ForeignKey(Helloer, related_name='friendship_requests_received')

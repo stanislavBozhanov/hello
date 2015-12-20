@@ -30,8 +30,9 @@ admin.site.register(Helloer, HelloerAdmin)
 
 class FriendshipAdmin(admin.ModelAdmin):
     list_display = (
-        'user_id',
-        'friend_id'
+        'date'
+        'user',
+        'friend'
     )
 
     class Meta:

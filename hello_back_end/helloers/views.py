@@ -53,4 +53,3 @@ def friends(request):
     friend = friendships.friend
     serializer = HellowerSerializer(friend)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
