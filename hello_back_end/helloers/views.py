@@ -11,6 +11,7 @@ from .serializers import EventSerializer, HelloerSerializer, FriendshipSerialize
 
 @api_view(['POST'])
 def event(request):
+    print(request.data)
     serializer = EventSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
